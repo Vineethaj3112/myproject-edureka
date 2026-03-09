@@ -26,7 +26,11 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          body as (address as (city as string, geo as (lat as double, lng as double), street as string, suite as string, zipcode as string), company as (bs as string, catchPhrase as string, name as string), email as string, id as short, name as string, phone as string, username as string, website as string),",
+				"          headers as [string,string]",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     httpMethod: 'GET',",
 				"     timeout: 30,",
@@ -40,7 +44,12 @@
 				"     requestInterval: 0,",
 				"     paginationRules: ['supportRFC5988' -> 'true'],",
 				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> source2",
-				"source1 select(skipDuplicateMapInputs: true,",
+				"source1 select(mapColumn(",
+				"          id = {body.id},",
+				"          name = {body.name},",
+				"          city = {body.address.city}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}

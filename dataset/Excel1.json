@@ -8,6 +8,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "DuplicateData",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "adf_duplicate_sample.xlsx",

@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Parquet1",
+						"referenceName": "DelimitedText3",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -61,7 +61,6 @@
 				"     composition: 'flowlet1_age') ~> flowlet1@(output1)",
 				"flowlet1@output1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'parquet',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]

@@ -15,11 +15,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": {
-					"value": "@dataset().Filename",
-					"type": "Expression"
-				},
-				"container": "final"
+				"folderPath": "flowlet",
+				"container": "finaloutput"
 			},
 			"compressionCodec": "snappy"
 		},

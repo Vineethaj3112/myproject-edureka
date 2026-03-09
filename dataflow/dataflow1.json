@@ -12,10 +12,25 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Parquet1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "select1"
+				},
+				{
+					"name": "flowlet1",
+					"flowlet": {
+						"referenceName": "flowlet1_age",
+						"type": "DataFlowReference"
+					}
 				}
 			],
 			"scriptLines": [
@@ -36,7 +51,19 @@
 				"          city = body.address.city",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 compose(mapColumn(",
+				"          id,",
+				"          name,",
+				"          city,",
+				"          age = id",
+				"     ),",
+				"     composition: 'flowlet1_age') ~> flowlet1@(output1)",
+				"flowlet1@output1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
